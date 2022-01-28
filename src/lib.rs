@@ -1,6 +1,6 @@
-use std::fs;
-use std::error::Error;
 use std::env;
+use std::error::Error;
+use std::fs;
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
@@ -12,7 +12,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     };
 
     for line in results {
-      println!("{}", line);
+        println!("{}", line);
     }
 
     Ok(())
@@ -30,10 +30,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     results
 }
 
-pub fn search_case_insensitive<'a>(
-    query: &str,
-    contents: &'a str,
-) -> Vec<&'a str> {
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
     let mut results = Vec::new();
 
@@ -55,7 +52,7 @@ pub struct Config {
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &str> {
         if args.len() < 3 {
-          return Err("not enough arguments");
+            return Err("not enough arguments");
         }
 
         let query = args[1].clone();
@@ -77,7 +74,7 @@ mod tests {
     #[test]
     fn case_sensitive() {
         let query = "duct";
-        let contents ="\
+        let contents = "\
 Rust:
 safe, fast, productive.
 Pick three.
@@ -89,7 +86,7 @@ Duct Tape.";
     #[test]
     fn case_insensitive() {
         let query = "rUsT";
-        let contents ="\
+        let contents = "\
 Rust:
 safe, fast, productive.
 Pick three.
